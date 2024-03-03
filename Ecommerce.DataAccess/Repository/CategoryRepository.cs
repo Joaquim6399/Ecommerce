@@ -9,38 +9,21 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.DataAccess.Repository
 {
-    public class CategoryRepository : ICategoryRepository
+    public class CategoryRepository : Repository<Category>, ICategoryRepository
     {
         private readonly ApplicationDbContext _db;
-
-        public CategoryRepository(ApplicationDbContext db)
+        public CategoryRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
-
-        public void Create(Category entity)
+        public void Save()
         {
-            throw new NotImplementedException();
+            _db.SaveChanges();
         }
 
-        public Category Get(int id)
+        public void Update(Category obj)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Category> GetAll()
-        {
-            return _db.Categories.ToList();
-        }
-
-        public void Remove(Category entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Category entity)
-        {
-            throw new NotImplementedException();
+            _db.Categories.Update(obj);
         }
     }
 }
