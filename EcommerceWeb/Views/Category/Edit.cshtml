@@ -1,0 +1,18 @@
+﻿@using Ecommerce.Models
+@model Category
+
+<h2>Edit category</h2>
+<form method="post">
+
+    <label asp-for="Name"></label><br>
+    <input asp-for="Name"><br>
+    <span asp-validation-for="Name" class="text-danger"></span>
+    <br />
+    <label asp-for="DisplayOrder"></label><br>
+    <input asp-for="DisplayOrder"><br>
+    <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+    <br />
+    <input type="submit" value="Submit">
+
+    <a asp-controller="Category" asp-action="Index" class="btn">return to list</a>
+</form>

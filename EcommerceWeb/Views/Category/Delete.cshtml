@@ -1,0 +1,16 @@
+﻿@using Ecommerce.Models
+@model Category
+
+<h2>Delete category</h2>
+<form method="post">
+
+    <label asp-for="Name"></label><br>
+    <input disabled asp-for="Name"><br>
+    <br />
+    <label asp-for="DisplayOrder"></label><br>
+    <input disabled asp-for="DisplayOrder"><br>
+    <br />
+    <input type="submit" value="Submit">
+
+    <a asp-controller="Category" asp-action="Index" class="btn">return to list</a>
+</form>

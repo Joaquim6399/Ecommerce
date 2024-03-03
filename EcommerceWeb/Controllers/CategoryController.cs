@@ -19,5 +19,55 @@ namespace EcommerceWeb.Controllers
             List<Category> list = _categoryRepo.GetAll().ToList();
             return View(list);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Category obj)
+        {
+            if(ModelState.IsValid)
+            {
+                _categoryRepo.Add(obj);
+                _categoryRepo.Save();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public IActionResult Edit(int id)
+        {
+            Category obj = _categoryRepo.Get(u => u.Id == id);
+            return View(obj);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Category obj)
+        {
+            if(ModelState.IsValid)
+            {
+                _categoryRepo.Update(obj);
+                _categoryRepo.Save();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+        
+        public IActionResult Delete(int id)
+        {
+            Category obj = _categoryRepo.Get(u => u.Id == id);
+            return View(obj);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Category obj)
+        {
+            _categoryRepo.Remove(obj);
+            _categoryRepo.Save();
+            return RedirectToAction("Index");
+        }
+        
     }
 }
