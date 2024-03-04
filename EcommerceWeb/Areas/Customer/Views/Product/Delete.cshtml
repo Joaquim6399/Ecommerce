@@ -1,0 +1,34 @@
+﻿@using Ecommerce.Models
+@model Product 
+
+<h2>Delete Product</h2>
+<form method="post">
+
+    <label asp-for="Title"></label><br>
+    <input disabled asp-for="Title"><br>
+    <br />
+    <label asp-for="Description"></label><br>
+    <input disabled asp-for="Description"><br>
+    <br />
+    <label asp-for="ISBN"></label><br>
+    <input disabled asp-for="ISBN"><br>
+    <br />
+    <label asp-for="Author"></label><br>
+    <input disabled asp-for="Author"><br>
+    <br />
+    <label asp-for="ListPrice"></label><br>
+    <input disabled asp-for="ListPrice"><br>
+    <br />
+    <label asp-for="Price"></label><br>
+    <input disabled asp-for="Price"><br>
+    <br />
+    <label asp-for="Price50"></label><br>
+    <input disabled asp-for="Price50"><br>
+    <br />
+    <label asp-for="Price100"></label><br>
+    <input disabled asp-for="Price100"><br>
+
+    <input type="submit" value="Submit">
+
+    <a asp-controller="Product" asp-action="Index" class="btn">return to list</a>
+</form>
