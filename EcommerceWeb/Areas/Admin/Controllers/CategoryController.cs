@@ -3,8 +3,9 @@ using Ecommerce.DataAccess.Repository.IRepository;
 using Ecommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EcommerceWeb.Controllers
+namespace EcommerceWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
 
@@ -12,7 +13,7 @@ namespace EcommerceWeb.Controllers
 
         public CategoryController(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork; 
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
@@ -28,7 +29,7 @@ namespace EcommerceWeb.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _unitOfWork.Category.Add(obj);
                 _unitOfWork.Save();
@@ -46,7 +47,7 @@ namespace EcommerceWeb.Controllers
         [HttpPost]
         public IActionResult Edit(Category obj)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _unitOfWork.Category.Update(obj);
                 _unitOfWork.Save();
@@ -54,7 +55,7 @@ namespace EcommerceWeb.Controllers
             }
             return View();
         }
-        
+
         public IActionResult Delete(int id)
         {
             Category obj = _unitOfWork.Category.Get(u => u.Id == id);
@@ -68,6 +69,6 @@ namespace EcommerceWeb.Controllers
             _unitOfWork.Save();
             return RedirectToAction("Index");
         }
-        
+
     }
 }
