@@ -8,15 +8,15 @@ namespace EcommerceWeb.Controllers
     public class CategoryController : Controller
     {
 
-        private readonly ICategoryRepository _categoryRepo;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CategoryController(ICategoryRepository categoryRepo)
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _categoryRepo = categoryRepo; 
+            _unitOfWork = unitOfWork; 
         }
         public IActionResult Index()
         {
-            List<Category> list = _categoryRepo.GetAll().ToList();
+            List<Category> list = _unitOfWork.Category.GetAll().ToList();
             return View(list);
         }
 
@@ -30,8 +30,8 @@ namespace EcommerceWeb.Controllers
         {
             if(ModelState.IsValid)
             {
-                _categoryRepo.Add(obj);
-                _categoryRepo.Save();
+                _unitOfWork.Category.Add(obj);
+                _unitOfWork.Save();
                 return RedirectToAction("Index");
             }
             return View();
@@ -39,7 +39,7 @@ namespace EcommerceWeb.Controllers
 
         public IActionResult Edit(int id)
         {
-            Category obj = _categoryRepo.Get(u => u.Id == id);
+            Category obj = _unitOfWork.Category.Get(u => u.Id == id);
             return View(obj);
         }
 
@@ -48,8 +48,8 @@ namespace EcommerceWeb.Controllers
         {
             if(ModelState.IsValid)
             {
-                _categoryRepo.Update(obj);
-                _categoryRepo.Save();
+                _unitOfWork.Category.Update(obj);
+                _unitOfWork.Save();
                 return RedirectToAction("Index");
             }
             return View();
@@ -57,15 +57,15 @@ namespace EcommerceWeb.Controllers
         
         public IActionResult Delete(int id)
         {
-            Category obj = _categoryRepo.Get(u => u.Id == id);
+            Category obj = _unitOfWork.Category.Get(u => u.Id == id);
             return View(obj);
         }
 
         [HttpPost]
         public IActionResult Delete(Category obj)
         {
-            _categoryRepo.Remove(obj);
-            _categoryRepo.Save();
+            _unitOfWork.Category.Remove(obj);
+            _unitOfWork.Save();
             return RedirectToAction("Index");
         }
         
