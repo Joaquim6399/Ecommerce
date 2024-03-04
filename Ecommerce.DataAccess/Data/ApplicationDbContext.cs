@@ -17,7 +17,7 @@ namespace Ecommerce.DataAccess.Data
         }
 
         public DbSet<Category> Categories { get; set; }
-
+        public DbSet<Product> products { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
@@ -25,6 +25,12 @@ namespace Ecommerce.DataAccess.Data
             new Category { Id = 2, Name = "Horror", DisplayOrder = 2 },
              new Category { Id = 3, Name = "Fiction", DisplayOrder = 3 }
         );
+
+            modelBuilder.Entity<Product>().HasData(
+            new Product { Id = 1, Title = "Can't Hurt me", Description="David Goggins story", ISBN = "12345678", Author = "David Goggins", ListPrice = 20, Price = 20, Price50 = 10, Price100 = 5 },
+            new Product { Id = 2, Title = "Discipline Is The Destiny", Description = "Book about discipline", ISBN = "12345679", Author = "Ryan Holiday", ListPrice = 30, Price = 30, Price50 = 20, Price100 = 15 }
+
+            );
         }
     }
 }

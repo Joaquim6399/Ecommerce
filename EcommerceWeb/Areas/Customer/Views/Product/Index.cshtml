@@ -1,0 +1,35 @@
+﻿@using Ecommerce.Models
+@model List<Product>
+
+<h2> Product List </h2>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>ISBN</th>
+        <th>Author</th>
+        <th>List Price</th>
+        <th>Price</th>
+        <th>Price 50</th>
+        <th>Price 100</th>
+    </tr>
+
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td>@i.Title</td>
+            <td>@i.Description</td>
+            <td>@i.ISBN</td>
+            <td>@i.Author</td>
+            <td>@i.ListPrice</td>
+            <td>@i.Price</td>
+            <td>@i.Price50</td>
+            <td>@i.Price100</td>
+            <td><a asp-controller="Product" asp-action="Edit" asp-route-id="@i.Id" class="btn primary">Edit</a></td>
+            <td><a asp-controller="Product" asp-action="Delete" asp-route-id="@i.Id" class="btn danger">Delete</a></td>
+        </tr>
+    }
+</table>
+
+<a asp-controller="Product" asp-action="Create">Create</a>
