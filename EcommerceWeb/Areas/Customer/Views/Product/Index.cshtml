@@ -13,6 +13,7 @@
         <th>Price</th>
         <th>Price 50</th>
         <th>Price 100</th>
+        <th>Category</th>
     </tr>
 
     @foreach (var i in Model)
@@ -26,6 +27,7 @@
             <td>@i.Price</td>
             <td>@i.Price50</td>
             <td>@i.Price100</td>
+            <td>@i.CategoryId</td>
             <td><a asp-controller="Product" asp-action="Edit" asp-route-id="@i.Id" class="btn primary">Edit</a></td>
             <td><a asp-controller="Product" asp-action="Delete" asp-route-id="@i.Id" class="btn danger">Delete</a></td>
         </tr>
