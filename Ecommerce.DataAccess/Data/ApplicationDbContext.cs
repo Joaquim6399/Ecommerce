@@ -27,8 +27,8 @@ namespace Ecommerce.DataAccess.Data
         );
 
             modelBuilder.Entity<Product>().HasData(
-            new Product { Id = 1, Title = "Can't Hurt me", Description="David Goggins story", ISBN = "12345678", Author = "David Goggins", ListPrice = 20, Price = 20, Price50 = 10, Price100 = 5, CategoryId = 1 },
-            new Product { Id = 2, Title = "Discipline Is The Destiny", Description = "Book about discipline", ISBN = "12345679", Author = "Ryan Holiday", ListPrice = 30, Price = 30, Price50 = 20, Price100 = 15, CategoryId = 2 }
+            new Product { Id = 1, Title = "Can't Hurt me", Description="David Goggins story", ISBN = "12345678", Author = "David Goggins", ListPrice = 20, Price = 20, Price50 = 10, Price100 = 5, CategoryId = 1, ImageUrl="" },
+            new Product { Id = 2, Title = "Discipline Is The Destiny", Description = "Book about discipline", ISBN = "12345679", Author = "Ryan Holiday", ListPrice = 30, Price = 30, Price50 = 20, Price100 = 15, CategoryId = 2, ImageUrl="" }
 
             );
         }
