@@ -27,11 +27,11 @@
             <td>@i.Price</td>
             <td>@i.Price50</td>
             <td>@i.Price100</td>
-            <td>@i.CategoryId</td>
-            <td><a asp-controller="Product" asp-action="Edit" asp-route-id="@i.Id" class="btn primary">Edit</a></td>
+            <td>@i.Category.Name</td>
+            <td><a asp-controller="Product" asp-action="Upsert" asp-route-id="@i.Id" class="btn primary">Edit</a></td>
             <td><a asp-controller="Product" asp-action="Delete" asp-route-id="@i.Id" class="btn danger">Delete</a></td>
         </tr>
     }
 </table>
 
-<a asp-controller="Product" asp-action="Create">Create</a>
+<a asp-controller="Product" asp-action="Upsert">Create</a>
