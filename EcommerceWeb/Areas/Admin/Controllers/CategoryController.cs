@@ -70,5 +70,10 @@ namespace EcommerceWeb.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Test()
+        {
+            return View();
+        }
+
     }
 }
