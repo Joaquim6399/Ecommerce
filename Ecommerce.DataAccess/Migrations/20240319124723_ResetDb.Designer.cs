@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240305144526_AddForeignKeyCategoryProductRelation")]
-    partial class AddForeignKeyCategoryProductRelation
+    [Migration("20240319124723_ResetDb")]
+    partial class ResetDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,6 +88,10 @@ namespace Ecommerce.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("ListPrice")
                         .HasColumnType("float");
 
@@ -118,6 +122,7 @@ namespace Ecommerce.DataAccess.Migrations
                             CategoryId = 1,
                             Description = "David Goggins story",
                             ISBN = "12345678",
+                            ImageUrl = "",
                             ListPrice = 20.0,
                             Price = 20.0,
                             Price100 = 5.0,
@@ -131,6 +136,7 @@ namespace Ecommerce.DataAccess.Migrations
                             CategoryId = 2,
                             Description = "Book about discipline",
                             ISBN = "12345679",
+                            ImageUrl = "",
                             ListPrice = 30.0,
                             Price = 30.0,
                             Price100 = 15.0,
