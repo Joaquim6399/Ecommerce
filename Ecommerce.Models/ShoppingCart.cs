@@ -12,6 +12,7 @@ namespace Ecommerce.Models
 {
     public class ShoppingCart
     {
+
         public int Id { get; set; }
         public int ProductId { get; set; }
         [ForeignKey("ProductId")]
@@ -23,7 +24,6 @@ namespace Ecommerce.Models
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
-        
 
     }
 }
