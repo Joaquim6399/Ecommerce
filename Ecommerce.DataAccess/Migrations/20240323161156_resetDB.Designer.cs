@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240319161413_AddApplicationUser")]
-    partial class AddApplicationUser
+    [Migration("20240323161156_resetDB")]
+    partial class resetDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,13 +50,13 @@ namespace Ecommerce.DataAccess.Migrations
                         {
                             Id = 1,
                             DisplayOrder = 1,
-                            Name = "SciFi"
+                            Name = "Action"
                         },
                         new
                         {
                             Id = 2,
                             DisplayOrder = 2,
-                            Name = "Horror"
+                            Name = "Thriller"
                         },
                         new
                         {
@@ -85,29 +85,19 @@ namespace Ecommerce.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ISBN")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("ListPrice")
-                        .HasColumnType("float");
-
                     b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Price100")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Price50")
                         .HasColumnType("float");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Volume")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -119,31 +109,74 @@ namespace Ecommerce.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Author = "David Goggins",
+                            Author = "Akira Toriyama",
                             CategoryId = 1,
-                            Description = "David Goggins story",
-                            ISBN = "12345678",
+                            Description = "Forced to ally with Vegeta against their common enemy, Gohan and Kuririn fight desperately against Freeza's elite troops, the seemingly unstoppable Ginyu Force! But the tables may be turning as Son Goku finally arrives on Planet Namek, his strength and speed increased ten-fold by training under 100 times Earth's gravity! Could Goku have become the legendary \"Super Saiyan\"!? And even if they defeat Captain Ginyu, can they prevent Freeza from wishing for immortality on the Dragon Balls--and Vegeta from betraying them and doing the same?",
                             ImageUrl = "",
-                            ListPrice = 20.0,
                             Price = 20.0,
-                            Price100 = 5.0,
-                            Price50 = 10.0,
-                            Title = "Can't Hurt me"
+                            Title = "Dragon Ball Z",
+                            Volume = 8
                         },
                         new
                         {
                             Id = 2,
-                            Author = "Ryan Holiday",
-                            CategoryId = 2,
-                            Description = "Book about discipline",
-                            ISBN = "12345679",
+                            Author = "KEISUKE ITAGAKI",
+                            CategoryId = 1,
+                            Description = "Baki",
                             ImageUrl = "",
-                            ListPrice = 30.0,
                             Price = 30.0,
-                            Price100 = 15.0,
-                            Price50 = 20.0,
-                            Title = "Discipline Is The Destiny"
+                            Title = "Baki-Dou",
+                            Volume = 6
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Author = "KEISUKE ITAGAKI",
+                            CategoryId = 1,
+                            Description = "the embodiment of self-defense, goes up against the awe-inspiring jewel of the 4,000-year history of Chinese martial arts, Sea King Retsu!! Attack Vs. defense...Which tactic will prevail?!",
+                            ImageUrl = "",
+                            Price = 30.0,
+                            Title = "BAKI",
+                            Volume = 25
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Author = "Gege Akutami",
+                            CategoryId = 1,
+                            Description = "While investigating a strange set of mysterious deaths, Itadori meets Junpei, a troubled kid who is often bullied at school. However, Junpei is also befriended by the culprit behind the bloody incident—Mahito, a mischievous cursed spirit! Mahito sets in motion a devious plan involving Junpei, hoping to ensnare Itadori as well.",
+                            ImageUrl = "",
+                            Price = 30.0,
+                            Title = "Jujutsu Kaisen",
+                            Volume = 4
                         });
+                });
+
+            modelBuilder.Entity("Ecommerce.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -300,12 +333,10 @@ namespace Ecommerce.DataAccess.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -342,12 +373,10 @@ namespace Ecommerce.DataAccess.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -389,6 +418,25 @@ namespace Ecommerce.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Ecommerce.Models.ShoppingCart", b =>
+                {
+                    b.HasOne("Ecommerce.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

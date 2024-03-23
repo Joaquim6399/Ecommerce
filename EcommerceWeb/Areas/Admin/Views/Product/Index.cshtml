@@ -9,10 +9,8 @@
         <th>Description</th>
         <th>ISBN</th>
         <th>Author</th>
-        <th>List Price</th>
+        <th>Volume</th>
         <th>Price</th>
-        <th>Price 50</th>
-        <th>Price 100</th>
         <th>Category</th>
     </tr>
 
@@ -21,12 +19,9 @@
         <tr>
             <td>@i.Title</td>
             <td>@i.Description</td>
-            <td>@i.ISBN</td>
             <td>@i.Author</td>
-            <td>@i.ListPrice</td>
+            <td>@i.Volume</td>
             <td>@i.Price</td>
-            <td>@i.Price50</td>
-            <td>@i.Price100</td>
             <td>@i.Category.Name</td>
             <td><a asp-controller="Product" asp-action="Upsert" asp-route-id="@i.Id" class="btn primary">Edit</a></td>
             <td><a asp-controller="Product" asp-action="Delete" asp-route-id="@i.Id" class="btn danger">Delete</a></td>

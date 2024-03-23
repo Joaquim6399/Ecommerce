@@ -10,15 +10,13 @@
                         <img src="@product.ImageUrl" class="card-img-top rounded" />
                         <div class="card-body">
                             <div class="pl-1">
-                                <p>@product.Title</p>
+                                <p>@product.Title, Vol. @product.Volume</p>
                                 <p>@product.Author</p>
                             </div>
                             <div class="pl-1">
-                                <p>@product.ListPrice.ToString("c")</p>
+                                <p>@product.Price.ToString("c")</p>
                             </div>
-                            <div class="pl-1">
-                                <p> As low as: @product.Price100.ToString("c")</p>
-                            </div>
+                            
                         </div>
                         <div>
                             <a asp-action="Details" asp-route-id="@product.Id" class="btn btn-primary bg-gradient border-0 form-control">
