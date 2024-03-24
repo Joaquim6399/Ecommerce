@@ -10,3 +10,6 @@ Web App where that simulated an ecommerce website where you can purchase my favo
 - Repository Pattern/Unit of work
 - Identity
 - Azure
+
+# Preview
+- available on https://joaquimsoares.dev
