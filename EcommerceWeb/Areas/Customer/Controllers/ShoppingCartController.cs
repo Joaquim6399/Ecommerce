@@ -72,7 +72,26 @@ namespace EcommerceWeb.Areas.Customer.Controllers
 
         public IActionResult Summary()
         {
-            return View();
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            ShoppingCartVM = new ShoppingCartVM();
+            ShoppingCartVM.shoppingCartList = _unitOfWork.ShoppingCart.GetAll().Where(u => u.ApplicationUserId == userId);
+
+            double orderTotal = 0;
+            ShoppingCartVM.OrderHeader.ApplicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
+
+            ShoppingCartVM.OrderHeader.Name = ShoppingCartVM.OrderHeader.ApplicationUser.Name;
+            ShoppingCartVM.OrderHeader.StreetAddress = ShoppingCartVM.OrderHeader.ApplicationUser.StreetAddress;
+            ShoppingCartVM.OrderHeader.City = ShoppingCartVM.OrderHeader.ApplicationUser.City;
+            ShoppingCartVM.OrderHeader.State = ShoppingCartVM.OrderHeader.ApplicationUser.State;
+            ShoppingCartVM.OrderHeader.PostalCode = ShoppingCartVM.OrderHeader.ApplicationUser.PostalCode;
+
+            foreach (var s in ShoppingCartVM.shoppingCartList)
+            {
+                orderTotal += _unitOfWork.Product.Get(u => u.Id == s.ProductId).Price * s.Count;
+            }
+            ShoppingCartVM.OrderHeader.OrderTotal = orderTotal;
+            return View(ShoppingCartVM);
         }
     }
 }
