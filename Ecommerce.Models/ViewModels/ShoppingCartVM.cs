@@ -10,6 +10,6 @@ namespace Ecommerce.Models.ViewModels
     {
         public IEnumerable<ShoppingCart> shoppingCartList { get; set; }
         public OrderHeader OrderHeader { get; set; }
-
+    
     }
 }

@@ -76,6 +76,7 @@ namespace EcommerceWeb.Areas.Customer.Controllers
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
             ShoppingCartVM = new ShoppingCartVM();
             ShoppingCartVM.shoppingCartList = _unitOfWork.ShoppingCart.GetAll().Where(u => u.ApplicationUserId == userId);
+            ShoppingCartVM.OrderHeader = new();
 
             double orderTotal = 0;
             ShoppingCartVM.OrderHeader.ApplicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
