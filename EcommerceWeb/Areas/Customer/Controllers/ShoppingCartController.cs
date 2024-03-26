@@ -29,12 +29,13 @@ namespace EcommerceWeb.Areas.Customer.Controllers
             ShoppingCartVM.shoppingCartList = _unitOfWork.ShoppingCart.GetAll().Where(u=> u.ApplicationUserId == userId);
 
             double orderTotal = 0;
+            ShoppingCartVM.OrderHeader = new();
 
             foreach(var s in ShoppingCartVM.shoppingCartList)
             {
                 orderTotal += _unitOfWork.Product.Get(u => u.Id == s.ProductId).Price * s.Count;
             }
-            ShoppingCartVM.OrderTotal = orderTotal;
+            ShoppingCartVM.OrderHeader.OrderTotal = orderTotal;
             return View(ShoppingCartVM);
         }
 
