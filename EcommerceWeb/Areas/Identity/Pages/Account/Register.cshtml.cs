@@ -114,6 +114,7 @@ namespace EcommerceWeb.Areas.Identity.Pages.Account
             public string? City { get; set; }
             public string? State { get; set; }
             public string? PostalCode { get; set; }
+            public string? PhoneNumber { get; set; }
 
         }
 
@@ -156,6 +157,7 @@ namespace EcommerceWeb.Areas.Identity.Pages.Account
                 user.City = Input.City;
                 user.State = Input.State;
                 user.PostalCode = Input.PostalCode;
+                user.PhoneNumber = Input.PhoneNumber;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

@@ -40,7 +40,8 @@
 									<label>Phone</label>
 								</div>
 								<div class="col-9">
-									<input  class="form-control" />
+									<input asp-for="@Model.OrderHeader.PhoneNumber"  class="form-control" />
+									<span asp-validation-for="OrderHeader.PhoneNumber" class="text-danger"></span>
 								</div>
 							</div>
 							<div class="row my-1">
