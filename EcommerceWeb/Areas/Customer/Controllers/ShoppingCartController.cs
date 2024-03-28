@@ -139,8 +139,13 @@ namespace EcommerceWeb.Areas.Customer.Controllers
                 _unitOfWork.Save();
             }
 
-
-			return View(ShoppingCartVM);
+            //Stripe logic
+            return RedirectToAction(nameof(Confirmation), new { id = ShoppingCartVM.OrderHeader.Id });
 		}
+
+        public IActionResult Confirmation(int id)
+        {
+            return View(id);
+        }
 	}
 }
