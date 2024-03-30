@@ -25,5 +25,7 @@ namespace Ecommerce.Models
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
 
+        public double Price { get; set; }
+
     }
 }
