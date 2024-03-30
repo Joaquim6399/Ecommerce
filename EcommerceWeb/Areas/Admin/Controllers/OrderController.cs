@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceWeb.Areas.Admin.Controllers
 {
+
+    [Area("Admin")]
     public class OrderController : Controller
     {
 
