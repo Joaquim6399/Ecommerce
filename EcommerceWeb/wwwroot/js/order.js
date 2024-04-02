@@ -5,7 +5,7 @@ $(document).ready(function () {
 
 function loadDataTable() {
     $('#tblData').DataTable({
-        "ajax": { url: '/admin/order/getAll' },
+        "ajax": { url: '/customer/order/getAll' },
         "columns": [
             { data: 'id', "width": "5%" },
             { data: 'name', "width": "5%" },
@@ -17,7 +17,7 @@ function loadDataTable() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-75 btn-group" role="group" >
-                        <a href="/admin/order/details?OrderId=${data}" class="btn btn-primary mx-2">Manage</a>
+                        <a href="/customer/order/details?OrderId=${data}" class="btn btn-primary mx-2">Manage</a>
                     </div>
                     `
                 } ,
