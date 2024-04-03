@@ -10,6 +10,7 @@ namespace EcommerceWeb.Areas.Customer.Controllers
 {
 
     [Area("Customer")]
+    [Authorize]
     public class OrderController : Controller
     {
         [BindProperty]
@@ -62,6 +63,18 @@ namespace EcommerceWeb.Areas.Customer.Controllers
             _unitOfWork.Save();
 
             return RedirectToAction("Details", new { orderId = orderHeaderFromDb.Id });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = SD.Role_Admin)]
+        public IActionResult StartProcessing()
+        {
+            _unitOfWork.OrderHeader.UpdateStatus(OrderVM.OrderHeader.Id, SD.StatusInProcess);
+            _unitOfWork.Save();
+
+            
+            return RedirectToAction("Details", new { orderId = OrderVM.OrderHeader.Id });
+
         }
 
         #region API CALLS
