@@ -77,6 +77,23 @@ namespace EcommerceWeb.Areas.Customer.Controllers
 
         }
 
+        [HttpPost]
+        [Authorize(Roles = SD.Role_Admin)]
+        public IActionResult ShipOrder()
+        {
+            var orderFromDb = _unitOfWork.OrderHeader.Get(u => u.Id == OrderVM.OrderHeader.Id);
+            orderFromDb.ShippingDate = DateTime.Now;
+            orderFromDb.Carrier = OrderVM.OrderHeader.Carrier;
+            orderFromDb.TrackingNumber = OrderVM.OrderHeader.TrackingNumber;
+            orderFromDb.OrderStatus = SD.StatusShipped;
+            _unitOfWork.OrderHeader.Update(orderFromDb);
+            _unitOfWork.Save();
+
+
+            return RedirectToAction("Details", new { orderId = OrderVM.OrderHeader.Id });
+
+        }
+
         #region API CALLS
 
         [HttpGet]
