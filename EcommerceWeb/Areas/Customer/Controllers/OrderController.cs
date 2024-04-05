@@ -4,6 +4,7 @@ using Ecommerce.Models.ViewModels;
 using Ecommerce.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Stripe;
 using System.Security.Claims;
 
 namespace EcommerceWeb.Areas.Customer.Controllers
@@ -94,9 +95,39 @@ namespace EcommerceWeb.Areas.Customer.Controllers
 
         }
 
-        #region API CALLS
+        [HttpPost]
+        [Authorize(Roles = SD.Role_Admin)]
+        public IActionResult CancelOrder()
+        {
+            var orderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == OrderVM.OrderHeader.Id);
 
-        [HttpGet]
+            if(orderHeader.PaymentStatus == SD.PaymentStatusApproved)
+            {
+                var options = new RefundCreateOptions
+                {
+                    Reason = RefundReasons.RequestedByCustomer,
+                    PaymentIntent = orderHeader.PaymentIntentId
+                };
+
+                var service = new RefundService();
+                Refund refund = service.Create(options);
+                _unitOfWork.OrderHeader.UpdateStatus(orderHeader.Id, SD.StatusCancelled, SD.StatusRefunded);
+
+            } else
+            {
+
+                _unitOfWork.OrderHeader.UpdateStatus(orderHeader.Id, SD.StatusCancelled, SD.StatusRefunded);
+            }
+
+            _unitOfWork.Save();
+
+            return RedirectToAction("Details", new { orderId = OrderVM.OrderHeader.Id });
+
+        }
+
+            #region API CALLS
+
+            [HttpGet]
         public IActionResult GetAll()
         {
             List<OrderHeader> objOrderHeaders;
