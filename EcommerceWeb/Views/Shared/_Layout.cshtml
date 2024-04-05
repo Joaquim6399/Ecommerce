@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -49,9 +52,23 @@
                                 </ul>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index"><i class="bi bi-cart3"></i></a>
-                        </li>
+                        @if(HttpContextAccessor.HttpContext.Session.GetInt32(SD.SessionCart)!= null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index"><i class="bi bi-cart3"></i>
+                                    (@HttpContextAccessor.HttpContext.Session.GetInt32(SD.SessionCart))
+                                    </a>
+                            </li>
+                        } else
+                        {
+                            
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index"><i class="bi bi-cart3"></i>
+                                    (0)
+                                    </a>
+                            </li>
+                        }
+
 
                     </ul>
                 </div>

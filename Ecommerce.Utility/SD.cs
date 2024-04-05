@@ -25,5 +25,6 @@ namespace Ecommerce.Utility
         public const string PaymentStatusDelayedPayment = "ApprovedForDelayedPayment";
         public const string PaymentStatusRejected = "Reject";
 
+        public const string SessionCart = "SessionShoppingCart";
     }
 }

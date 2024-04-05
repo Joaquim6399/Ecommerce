@@ -27,6 +27,7 @@ namespace EcommerceWeb.Areas.Identity.Pages.Account
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
+            HttpContext.Session.Clear();
             if (returnUrl != null)
             {
                 TempData["success"] = "You have been logged out";
