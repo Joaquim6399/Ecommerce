@@ -91,6 +91,9 @@ namespace EcommerceWeb.Areas.Admin.Controllers
                 }
 
                 _unitOfWork.Save();
+
+                TempData["success"] = "successful change";
+
                 return RedirectToAction("Index");
             }
             else
@@ -102,6 +105,7 @@ namespace EcommerceWeb.Areas.Admin.Controllers
                     Value = u.Id.ToString()
                 });
             }
+
             return View(productVM);
         }
        
