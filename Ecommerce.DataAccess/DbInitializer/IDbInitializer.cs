@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.DataAccess.DbInitializer
 {
-    internal interface IDbInitializer
+    public interface IDbInitializer
     {
+        void Initialize();
     }
 }
