@@ -49,25 +49,20 @@
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a>
                                     </li>
+                                    <li><hr class="dropdown-divider"/></li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register user</a>
+                                    </li>
                                 </ul>
                             </li>
                         }
-                        @if(HttpContextAccessor.HttpContext.Session.GetInt32(SD.SessionCart)!= null)
-                        {
+                                                  
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index"><i class="bi bi-cart3"></i>
-                                    (@HttpContextAccessor.HttpContext.Session.GetInt32(SD.SessionCart))
+                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index">
+                                    @await Component.InvokeAsync("ShoppingCart")
                                     </a>
                             </li>
-                        } else
-                        {
-                            
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index"><i class="bi bi-cart3"></i>
-                                    (0)
-                                    </a>
-                            </li>
-                        }
+                       
 
 
                     </ul>
