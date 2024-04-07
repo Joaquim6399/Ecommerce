@@ -25,7 +25,7 @@ namespace EcommerceWeb.Areas.Admin.Controllers
 
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult getAll()
         {
             List<ApplicationUser> usersFromDb = _db.ApplicationUsers.ToList();
 
