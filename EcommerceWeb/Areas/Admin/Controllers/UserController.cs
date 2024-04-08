@@ -3,6 +3,7 @@ using Ecommerce.Models;
 using Ecommerce.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
 namespace EcommerceWeb.Areas.Admin.Controllers
 {
@@ -27,9 +28,42 @@ namespace EcommerceWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult getAll()
         {
-            List<ApplicationUser> usersFromDb = _db.ApplicationUsers.ToList();
+            var roles = _db.Roles.ToList();
+            var UserRoles = _db.UserRoles.ToList();
 
+            List<ApplicationUser> usersFromDb = _db.ApplicationUsers.ToList();
+            
+            foreach(var user in usersFromDb)
+            {
+                var roleId = UserRoles.FirstOrDefault(u => u.UserId == user.Id).RoleId;
+                user.Role = roles.FirstOrDefault(u => u.Id == roleId).Name;
+
+            }
             return Json(new { data = usersFromDb});
+        }
+
+        [HttpPost]
+        public IActionResult LockUnlock([FromBody]string id)
+        {
+            var objFromDb = _db.Users.FirstOrDefault(u => u.Id == id);
+
+            if(objFromDb == null)
+            {
+                return Json(new { success = false, message = "Error while Locking/Unlocking" });
+            }
+
+            if(objFromDb.LockoutEnd != null && objFromDb.LockoutEnd > DateTime.Now)
+            {
+                //Unlock user
+                objFromDb.LockoutEnd = DateTime.Now;
+            } else
+            {
+                //Lock user
+                objFromDb.LockoutEnd = DateTime.Now.AddYears(1000);
+            }
+
+            _db.SaveChanges();
+            return Json(new { success = true, message = "Operation successful" });
         }
 
         #endregion
