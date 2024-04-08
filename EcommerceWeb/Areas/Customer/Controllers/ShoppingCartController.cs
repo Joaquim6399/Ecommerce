@@ -149,7 +149,8 @@ namespace EcommerceWeb.Areas.Customer.Controllers
             }
 
             //Stripe logic
-            var domain = "https://localhost:7197/";
+           // var domain = "https://localhost:7197/";
+            var domain = "https://mangastore.azurewebsites.net/";
 
             var options = new SessionCreateOptions
             {
